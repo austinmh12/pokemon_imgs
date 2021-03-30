@@ -1,4 +1,5 @@
 from os import listdir
+import re
 
 def main():
 	files = [f for f in listdir('normal') if '.gif' in f]
@@ -9,9 +10,9 @@ def main():
 		if hexdata[:12] != '474946383961':
 			print(file)
 			continue
-		for m in re.findall(r'21f904[0-9a-f]{8}00', hexdata, re.I):
+		for m in re.finditer(r'21f904[0-9a-f]{8}00', hexdata, re.I):
 			st, _ = m.span()
-			hexdata[st+6:st+8] = '09'
+			hexdata = f'{hexdata[:st+6]}09{hexdata[st+8:]}'
 		with open(f'normal/{file}', 'wb') as f:
 			f.write(bytes.fromhex(''.join(hexdata)))
 
