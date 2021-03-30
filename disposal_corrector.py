@@ -69,6 +69,7 @@ def main():
 		g = GIF(f'normal/{file}')
 		if ''.join(g.header) != '474946383961':
 			print(file)
+			continue
 		if g.fixed:
 			g.save(f'normal/{file}')
 
