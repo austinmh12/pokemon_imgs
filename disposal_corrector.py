@@ -10,7 +10,7 @@ def main():
 			print(file)
 			continue
 		for m in re.findall(r'21f904[0-9a-f]{8}00', hexdata, re.I):
-			st, _ = 
+			st, _ = m.span()
 			hexdata[st+6:st+8] = '09'
 		with open(f'normal/{file}', 'wb') as f:
 			f.write(bytes.fromhex(''.join(hexdata)))
